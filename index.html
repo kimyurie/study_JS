@@ -9,7 +9,6 @@
 </head>
 <!-- 다크모드 -->
   <body class="dark">
-    Dark모드
     <!-- 모달창은 보통 맨 앞에 적음 -->
     <div class="black-bg show-modal">
       <div class="white-bg">
@@ -57,11 +56,11 @@
             if(count % 2 == 1){
               $('.badge').html('Light 🔄')
               document.querySelector('.dark').style.background = 'white';
-              document.querySelector('.dark').style.color = 'black';
+              // document.querySelector('.dark').style.color = 'black';
             }else{
               $('.badge').html('Dark 🔄')
               document.querySelector('.dark').style.background = 'black';
-              document.querySelector('.dark').style.color = 'white';
+              // document.querySelector('.dark').style.color = 'white';
             }
           });
 
@@ -124,6 +123,66 @@
             }
           });
       </script>
+
+      <div class="alert alert-danger">
+        <span class="second">5</span>초 이내 구매시 사은품 증정!
+      </div>
+      <script>
+        // // 3초후 코드 실행
+        //   setTimeout(function(){
+        //     $('.alert').hide();
+        //   }, 3000)
+
+        // // 3초마다 코드 실행
+        //   setInterval(function(){
+        //     console.log('안녕')
+        //   }, 2000);
+
+        // 콜백함수자리에 함수넣기 스킬
+        // setTimeout(함수, 1000)
+        // // addEventListener(함수) 이렇게도 가능
+
+        // function 함수(){
+        //   console.log('안녕')
+        // }
+
+        // setTimeout(function(){
+        //   document.querySelector('.second').innerHTML = '4'
+        // }, 1000);
+        // setTimeout(function(){
+        //   document.querySelector('.second').innerHTML = '3'
+        // }, 2000);
+        // setTimeout(function(){
+        //   document.querySelector('.second').innerHTML = '2'
+        // }, 3000);
+        // setTimeout(function(){
+        //   document.querySelector('.second').innerHTML = '1'
+        // },4000);
+        // setTimeout(function(){
+        //   $('.alert').hide();
+        // }, 5000);
+
+
+        var count = 5;
+
+        setInterval(function(){
+          // // 1초 간격으로 초 줄어들면서 문자 출력
+          // var num = Number(document.querySelector('.second').innerHTML);
+          // num--;
+          // if (num < 1){
+          //   $('.alert').hide();
+          // }
+          // document.querySelector('.second').innerHTML = num; // 내가 짠거
+          count -= 1;
+          if(count >= 0){
+            document.querySelector('.second').innerHTML = count;
+          }else{
+            $('.alert').hide();
+          }
+        }, 1000);
+
+      </script>
+
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
