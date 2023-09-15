@@ -1,3 +1,8 @@
+/* 부트 스트랩 사용시 스크롤 속도 늦춰지는 거 복구*/
+:root {
+    scroll-behavior: auto;
+}
+
 .dark{
     background: black;
     color: white;
@@ -60,4 +65,22 @@
 
 .slide-box img{
     width: 100%;
+}
+
+.navbar{
+    /* 상단 고정 */
+    position: fixed;
+    width: 100%;
+    z-index: 5;
+}
+
+.navbar-brand{
+    font-size: 20px; 
+}
+
+.scroll_ch_box{
+    width: 100%;
+    height: 10px;
+    background-color: red;
+    position: fixed;
 }

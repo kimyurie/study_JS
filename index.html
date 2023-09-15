@@ -45,6 +45,31 @@
           </button>
         </div>
       </nav> 
+      
+
+      <script>
+        // 스크롤 될 때마다 코드 실행
+        window.addEventListener('scroll', function(){
+          // window.scrollY 는 유저가 얼마나 스크롤바 내렸나
+          // window.scrollTo(x,y)는 강제로 스크롤하기
+          // 부트 스트랩 사용시 스크롤 속도 늦춰짐
+          // window.scrollBy(s,y)는 현재 위치부터 강제로 스크롤하기
+
+        //   1. 스크롤바를 100px 내리면 로고 폰트사이즈를 작게 만들어오십시오.
+        // 반대로 100px 미만으로 내리면 로고 폰트사이즈를 크게 만들어옵시다. 
+          if(window.scrollY >= 100){
+            document.querySelector('.navbar-brand').style.fontSize = "10px";
+          }else if(window.scrollY < 100)
+            document.querySelector('.navbar-brand').style.fontSize = "20px";
+        })
+
+        // $(window).on('scroll', function(){
+        //     $(window).scrollTop() // 현재 스크롤바 위치 출력 = window.scrollY 
+        //   })
+
+
+      </script>
+
 
       <!-- 다크모드 버튼 -->
       <script>
@@ -76,6 +101,8 @@
       </ul> 
 
       <button class="log_btn">로그인</button>
+
+  
 
 
       <script>
@@ -272,10 +299,42 @@
             이전사진 -= 2; 
           }
         });
-        
-
-
       </script>
+
+      <div style="height: 1000px;"></div>
+
+      <div class="lorem" style="width: 200px; height: 100px; overflow-y: scroll">
+        Lorem ipsum dolor sit amet, consectetur adipisicing elit. Quae voluptas
+         voluptatum minus praesentium fugit debitis at, laborum ipsa itaque plac
+         eat sit, excepturi eius. Nostrum perspiciatis, eligendi quae consectetur praesentium exercitationem.
+      </div> 
+
+      <script>
+        // div의 스크롤바 내린 높이 + 눈에 보이는 div 높이 == div의 실제 높이 비교
+        // 위 맞으면 alert 띄우기
+        // window.scrollY
+
+        $('.lorem').on('scroll', function(){
+          var 스크롤양 = document.querySelector('.lorem').scrollTop; // div 스크롤바 내린 높이
+          var 실제높이 = document.querySelector('.lorem').scrollHeight; // div의 실제 높이
+          var 눈보이는높이 = document.querySelector('.lorem').clientHeight; // 눈에 보이는 div 높이
+          // 2. 회원약관 박스를 거의 끝까지 스크롤하면 alert를 띄워줍시다.
+          if (스크롤양 + 눈보이는높이 == 실제높이){
+          // if (스크롤양 + 눈보이는높이 > 실제높이 - 10){
+            alert('회원약관을 다 읽었습니다');
+          }
+        })
+
+        // 현재 웹 페이지 끝까지 스크롤 체크
+        // 페이지 로드완료 시 실행해야 정확하므로
+        // body 태그 끝나기 전에 넣는게 좋음
+        //  document.querySelector('html').scrollHeight; // querySelector('html') = documentElement
+        //   document.querySelector('html').clientHeight; 
+        //   window.scrollY
+      </script>
+
+      외우지 말고 이해~
+
 
     
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
