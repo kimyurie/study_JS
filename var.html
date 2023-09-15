@@ -1,0 +1,23 @@
+<!-- // Q5. 간단한 퀴즈 UI를 만들어봅시다.
+// 유저가 <input>에 답을 적고 제출버튼을 누를 수 있는 퀴즈 UI 입니다.
+// 1. 유저가 답을 맞추면 alert('성공');
+// 2. 유저가 답을 3번 찍어서 못맞추면 alert('멍청아') 를 띄워봅시다.
+// 하단에 자바스크립트 작성하면 됩니다. -->
+<!-- (아래 문제의 답은 1335입니다) -->
+<p>태조 이성계가 태어난 년도는?</p>
+<input type="text" id="answer">
+<button id="send-answer">제출</button>
+
+<script>
+  var count = 0;
+  document.getElementById('send-answer').addEventListener('click', function(){
+    count += 1;
+    console.log(count);
+
+    if(document.getElementById('answer').value == 1335){
+      alert('성공');
+    }else if(count >= 3 && document.getElementById('answer').value != 1335){
+      alert('멍청아');
+    }
+  })
+</script>
