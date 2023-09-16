@@ -32,12 +32,12 @@
     height : 100%;
     position : fixed;
     background : rgba(0,0,0,0.5);
-    z-index : 5;
+    z-index : 6;
     padding: 30px;
     visibility: hidden;
     opacity: 0;
     top: -100px;
-    transition: all 1s;
+    transition: all 1 s;
   }
 
 .show-modal{
@@ -50,6 +50,7 @@
     background: white;
     border-radius: 5px;
     padding: 30px;
+    color: black;
   } 
 
 .slide-container{

@@ -34,13 +34,38 @@
 // });
 
 // var 로 하면 안됌 
-for (let i = 0; i < 3; i++){
-    $('.tab-button').eq(i).on('click', function(){
-        $('.tab-button').removeClass('orange');
-        $('.tab-button').eq(i).addClass('orange');
-        $('.tab-content').removeClass('show');
-        $('.tab-content').eq(i).addClass('show');
-    });
+// for (let i = 0; i < 3; i++){
+//     $('.tab-button').eq(i).on('click', function(){
+//         탭열기(i)
+//     });
+// }
+
+// ** 이벤트 버블링으로 이벤트 리스너 줄일 수 있음 !!
+$('.list').click(function(){
+    // // 지금 누른게 버튼 0이면 탭열기(0)
+    // if (e.target == document.querySelectorAll('.tab-button')[0]){
+    //     탭열기(0)
+    // }
+    // // 지금 누른게 버튼 1이면 탭열기(1)
+    // if (e.target == document.querySelectorAll('.tab-button')[1]){
+    //     탭열기(1)
+    // }
+    // // 지금 누른게 버튼 2이면 탭열기(2)
+    // if (e.target == document.querySelectorAll('.tab-button')[2]){
+    //     탭열기(2)
+    // }
+
+    // ** 위코드 dataset 활용해 줄이기
+    탭열기(e.target.dataset.id)
+
+})
+
+function 탭열기(숫자){
+    // ** 축약할 코드에 변수가 있으면 변수를 파라미터로 바꿔야 잘된다
+    $('.tab-button').removeClass('orange');
+    $('.tab-button').eq(숫자).addClass('orange');
+    $('.tab-content').removeClass('show');
+    $('.tab-content').eq(숫자).addClass('show');
 }
 
 
