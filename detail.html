@@ -1,108 +1,196 @@
 <!doctype html>
 <html lang="en">
-  <head>
-    <meta charset="utf-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1">
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet" integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
-    <link rel="stylesheet" href="main.css">
-    <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js" integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ==" crossorigin="anonymous" referrerpolicy="no-referrer"></script>
-</head> 
-    <body>
-      <!-- 상품 상세페이지 -->
-      <div class="container mt-3">
-        <div class="card p-3">
-          <span class="car-title">상품명</span>
-          <span class="car-price">가격</span>
-        </div>
-      </div>
 
-      <script>
-        var car = ['소나타', 50000, 'white']; 
-        var car2 = {name : '소나타', price : [50000, 3000, 4000]} // Object 자료형
-        // Object는 순서 개념 없음 인덱스 사용 불가
-        // car.sort(); // 정렬
-        // car.slice(1,3); // 자르기
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/css/bootstrap.min.css" rel="stylesheet"
+    integrity="sha384-1BmE4kWBq78iYhFldvKuhfTAU6auU8tT94WrHftjDbrCEXSU1oBoqyl2QvZ6jIW3" crossorigin="anonymous">
+  <link rel="stylesheet" href="main.css">
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.6.0/jquery.min.js"
+    integrity="sha512-894YE6QWD5I59HgZOGReFYm4dnWc1Qt5NtvYSaNcOP+u1T9qYdvdihz0PPSiiqn/+/3e7Jo4EaG7TubfWGUrMQ=="
+    crossorigin="anonymous" referrerpolicy="no-referrer"></script>
+</head>
 
-      //   // 여기서 car2 에 저장된 소나타라는 상품명과 50000이라는 가격을
-      //   // 뽑아서 html에 집어넣어보십시오.자바스크립트 작성해서 구현합시다. 
-      // document.querySelector('.car-title').innerHTML = car2['name'];
-      // document.querySelector('.car-price').innerHTML = car2['price'];
+<body>
+  <!-- 상품 상세페이지 -->
+  <div class="container mt-3">
+    <div class="card p-3">
+      <span class="car-title">상품명</span>
+      <span class="car-price">가격</span>
+    </div>
+  </div>
 
-      document.querySelector('.car-price').innerHTML = car2.price[0]; // 이런게 client-side rendering 
+  <!-- select 인풋 다루기 ex) 상품 선택 -->
+  <form class="container my-5 form-group">
+    <p>상품선택</p>
+    <select class="form-select mt-2">
+      <option>모자</option>
+      <option>셔츠</option>
+      <option>바지</option>
+    </select>
+    <select class="form-select mt-2 form-hide">
+      <!-- 아래 옵션에 바지 선택하면 28, 30나오게 html 생성 문법 써서 해보기 -->
+      <!-- <option>95</option>
+      <option>100</option> -->
+    </select>
+  </form>
 
-      // 이런거 하는 이유?
-      // 1. server-side rendering 
-      // 서버에서 html을 미리 완성해서 고객에게 보냄 (서버가 html 다 만들어야해서 귀찮음)
-      // 2. client-side rendering
-      // 서버가 비어있는 html과 데이터만 보내면 js이용해서 고객 브라우저 안에서 html 완성
-      // (서버가 편함)
+  <!-- <div id="test">
+    <h4>반가워</h4>
+  </div> -->
 
+  <script>
+    // // js로 html 생성법1
+    // var a = document.createElement('p');
+    // a.innerHTML = '안녕';
+    // document.querySelector('#test').appendChild(a);
 
-      </script>
+    // // js로 html 생성법2 - 이거쓰깅
+    // var 템플릿 = '<p>안녕</p>';
+    // // document.querySelector('#test').insertAdjacentHTML('beforeend', 템플릿);
+    // $('#test').append(템플릿); // 위와 동일
 
-        <style>
-            ul.list {
-              list-style-type: none;
-              margin: 0;
-              padding: 0;
-              border-bottom: 1px solid #ccc;
-            }
-            ul.list::after {
-              content: '';
-              display: block;
-              clear: both;
-            }
-            .tab-button {
-              display: block;
-              padding: 10px 20px 10px 20px;
-              float: left;
-              margin-right: -1px;
-              margin-bottom: -1px;
-              color: grey;
-              text-decoration: none;
-              cursor: pointer;
-            }
-            .orange {
-              border-top: 2px solid orange;
-              border-right: 1px solid #ccc;
-              border-bottom: 1px solid white;
-              border-left: 1px solid #ccc;
-              color: black;
-              margin-top: -2px;
-            }
-            .tab-content {
-              display: none;
-              padding: 10px;
-            }
-            .show {
-              display: block;
-            }
-          </style>
-          
-          <div class="container mt-5">
-            <ul class="list">
-              <!--**  html 태그에 몰래 정보 숨기기 가능 data-자료이름="값" -->
-              <li class="tab-button" data-id="0">Products</li>
-              <li class="tab-button orange" data-id="1">Information</li>
-              <li class="tab-button" data-id="2">Shipping</li>
-            </ul>
-            <div class="tab-content">
-              <p>상품설명입니다. Product</p>
-            </div>
-            <div class="tab-content show">
-              <p>스펙설명입니다. Information</p>
-            </div>
-            <div class="tab-content">
-              <p>배송정보입니다. Shipping</p>
-            </div>
-          </div> 
-
-        <script src="tab.js"></script>
+    var pants = [28, 30, 32, 34];
+    var shirts = [95, 100, 105];
 
 
+    // 셔츠고르면 밑에 <select> 더 보여주기
+      document.querySelectorAll('.form-select')[0].addEventListener('input', function(e){
+        // var value = $('.form-select').eq(0).val(); 아래와 동일
+        var value = e.currentTarget.value; // e.currentTarget은 지금 이벤트가 달린 곳
+        // var value = this.value; 
+        if(value == '셔츠'){
+          document.querySelectorAll('.form-select')[1].classList.remove('form-hide');
+          $('.form-select').eq(1).html('');
+          // var 셔츠사이즈 = `<option>95</option>
+          // <option>100</option>`;
+          // $('.form-select').eq(1).append(셔츠사이즈);
+          shirts.forEach(function(a){
+            $('.form-select').eq(1).append(`<option>${a}</option>`)
+          })
+         // 모자누르면 사라지게 
+        // }else if(value == '모자'){
+        //   document.querySelectorAll('.form-select')[1].classList.add('form-hide');
+        }else if(value == '바지'){
+          $('.form-select').eq(1).removeClass('form-hide');
+          $('.form-select').eq(1).html(''); //  싹 비워주세요
+          // var 바지사이즈 = `<option>28</option>
+          // <option>30</option>`; 
+          // $('.form-select').eq(1).append(바지사이즈);
+          pants.forEach(function(a){ // a 파라미터에 위 pants 데이터 복붙
+          // pants.forEach((a) => { // 위와 동일 arrow function 문법
+// 그냥 함수와 arrow function의 기능차이는 하나가 있는데
+// 함수 안에서 this를 써야할 경우 
+// - 그냥 함수는 함수 안에서 this를 알맞게 재정의해줍니다.
+// - arrow function은 함수 안에서 this를 재정의해주지 않고 바깥에 있던 this를 그대로 씁니다.
+// 그래서 이벤트리스너 콜백함수안에서 this를 써야하면 arrow function 쓰면 의도와 다르게 동작할 수도 있습니다.
+// 그런데선 쓰지마십시오 
+            $('.form-select').eq(1).append(`<option>${a}</option>`);
+          });
+        }
+      })
+
+      // obj 반복문- for in
+      var obj = {name:'kim', age:20}
+
+      for (var key in obj){
+        console.log(obj[key]);
+      }
     
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
+
+    var car = ['소나타', 50000, 'white'];
+    var car2 = { name: '소나타', price: [50000, 3000, 4000] } // Object 자료형
+    // Object는 순서 개념 없음 인덱스 사용 불가
+    // car.sort(); // 정렬
+    // car.slice(1,3); // 자르기
+
+    //   // 여기서 car2 에 저장된 소나타라는 상품명과 50000이라는 가격을
+    //   // 뽑아서 html에 집어넣어보십시오.자바스크립트 작성해서 구현합시다. 
+    // document.querySelector('.car-title').innerHTML = car2['name'];
+    // document.querySelector('.car-price').innerHTML = car2['price'];
+
+    document.querySelector('.car-price').innerHTML = car2.price[0]; // 이런게 client-side rendering 
+
+    // 이런거 하는 이유?
+    // 1. server-side rendering
+    // 서버에서 html을 미리 완성해서 고객에게 보냄 (서버가 html 다 만들어야해서 귀찮음)
+    // 2. client-side rendering
+    // 서버가 비어있는 html과 데이터만 보내면 js이용해서 고객 브라우저 안에서 html 완성
+    // (서버가 편함)
 
 
-  </body>
+  </script>
+
+  <style>
+    ul.list {
+      list-style-type: none;
+      margin: 0;
+      padding: 0;
+      border-bottom: 1px solid #ccc;
+    }
+
+    ul.list::after {
+      content: '';
+      display: block;
+      clear: both;
+    }
+
+    .tab-button {
+      display: block;
+      padding: 10px 20px 10px 20px;
+      float: left;
+      margin-right: -1px;
+      margin-bottom: -1px;
+      color: grey;
+      text-decoration: none;
+      cursor: pointer;
+    }
+
+    .orange {
+      border-top: 2px solid orange;
+      border-right: 1px solid #ccc;
+      border-bottom: 1px solid white;
+      border-left: 1px solid #ccc;
+      color: black;
+      margin-top: -2px;
+    }
+
+    .tab-content {
+      display: none;
+      padding: 10px;
+    }
+
+    .show {
+      display: block;
+    }
+  </style>
+
+  <div class="container mt-5">
+    <ul class="list">
+      <!--**  html 태그에 몰래 정보 숨기기 가능 data-자료이름="값" -->
+      <li class="tab-button" data-id="0">Products</li>
+      <li class="tab-button orange" data-id="1">Information</li>
+      <li class="tab-button" data-id="2">Shipping</li>
+    </ul>
+    <div class="tab-content">
+      <p>상품설명입니다. Product</p>
+    </div>
+    <div class="tab-content show">
+      <p>스펙설명입니다. Information</p>
+    </div>
+    <div class="tab-content">
+      <p>배송정보입니다. Shipping</p>
+    </div>
+  </div>
+
+  <script src="tab.js"></script>
+
+
+
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js"
+    integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p"
+    crossorigin="anonymous"></script>
+</body>
+
 </html>

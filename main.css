@@ -85,3 +85,7 @@
     background-color: red;
     position: fixed;
 }
+
+.form-hide{
+    display: none;
+}
