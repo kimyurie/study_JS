@@ -22,6 +22,7 @@
             <button class="btn btn-danger" id="more">더보기</button>
           </div>
 
+
           <script>
             // 1. 더보기버튼을 2번째 누르면 7,8,9번째 상품을 더 가져와서 html로 보여주십시오
             var click = 0;
@@ -48,14 +49,21 @@
                     }else if(click == 3){
                         document.querySelector('button').style.display = 'none';
                     }
-                   
-
-                  
-                
-               
-                  
             })
           </script>
+
+          <div class="container my-3">
+            <button class="btn btn-danger" id="price">가격순정렬</button>
+          </div>
+
+          <div class="container my-3">
+            <button class="btn btn-danger" id="sort1">다나가순 정렬</button>
+          </div>
+
+          <div class="container my-3">
+            <button class="btn btn-danger" id="filter">6만원 이하 상품보기</button>
+          </div>
+
            
           <script>
             var products = [
@@ -63,6 +71,131 @@
               { id : 1, price : 50000, title : 'Springfield Shirt' },
               { id : 2, price : 60000, title : 'Black Monastery' }
             ];
+
+            // 버튼 누르면 products안 데이터 가격순 정렬
+            $('#price').click(function(){
+              products.sort(function(a,b){ // a와 b는 array 안에 있는 데이터!
+                return a.price-b.price
+              });
+
+              $('row').html('');
+
+                products.forEach((a, i) => {
+                    var card = `<div class="col-sm-4">
+                      <img src="https://via.placeholder.com/600" class="w-100">
+                      <h5>${products[i].title}</h5>
+                      <p>가격 : ${products[i].price}</p>
+                    </div>`;
+
+                    $('.row').append(card);
+                })
+            });
+
+          // 버튼 누르면 다나가순 정렬
+            $('#sort1').click(function(){
+              products.sort(function(a,b){
+                if(a.title < b.title){
+                    return 1; // 양수 리턴
+                  }else{
+                    return -1; // 음수 리턴
+                  }
+            })
+
+              $('row').html('');
+
+                products.forEach((a, i) => {
+                    var card = `<div class="col-sm-4">
+                      <img src="https://via.placeholder.com/600" class="w-100">
+                      <h5>${products[i].title}</h5>
+                      <p>가격 : ${products[i].price}</p>
+                    </div>`;
+
+                    $('.row').append(card);
+                })
+            })
+
+
+            // "6만원 이하 상품보기" 버튼
+            $('#filter').click(function(){
+              var newProduct = products.filter(function(a){ // products.filter((a) => a.price <= 60000); // arrow function  
+                return a.price <= 60000;
+              });
+
+              $('row').html('');
+
+              newProduct.forEach((a, i) => {
+                    var card = `<div class="col-sm-4">
+                      <img src="https://via.placeholder.com/600" class="w-100">
+                      <h5>${newProduct[i].title}</h5>
+                      <p>가격 : ${newProduct[i].price}</p>
+                    </div>`;
+
+                    $('.row').append(card);
+                })
+            });
+
+            
+
+
+
+            // array 정렬하는 법
+            var 어레이 = [7,3,5,2,40];
+            
+            
+            // // 어레이 숫자 정렬 방법(오름차순)
+            // 내림 차순은 b - a
+            어레이.sort(function(a,b){ 
+              // 1. a,b는 array안의 자료이다.
+              // 2. return 오른쪽이 양수면 a를 오른쪽으로 
+              // -> 큰 숫자일 수록 뒤로 가게 됨 (오름차순 정렬)
+              // 3. return 왼쪽이 음수면 b를 오른쪽으로
+              return a - b
+            });
+
+            console.log(어레이);
+
+            // 문자 역순 정렬 (다-나-가)
+            var 어레이2 = ['가', '다', '나']; 
+            어레이2.sort(function(a, b){
+            // '가', '다'일 경우 
+            // a를 오른쪽으로 보내야하므로 return 뒤는 양수
+            // '다', '나'일 경우 
+            // b를 오른쪽으로 보내야하므로 return 뒤는 음수
+            // '가', '나'일 경우
+            // a를 오른쪽으로 보내야하므로 return 뒤는 양수
+              if(a < b){
+                return 1; // 양수 리턴
+              }else if(a > b){
+                return -1; // 음수 리턴
+              }else{
+                return 0; // 같은 글자면 return 0
+              }  
+            });
+
+            console.log(어레이2);
+
+
+            // array 자료 원하는 것만 필터 - 변수에 담아서 사용해야함
+            var 새어레이 = 어레이.filter(function(a){
+              return a < 4
+            });
+            console.log(새어레이);
+
+            // .sort()는 원본 변형 O
+            // .filter()는 원본 변형 X
+
+            // map 은 array 자료 전부 변형
+            var 맵어레이 = 어레이.map(function(a){
+              return a * 4
+            });
+            console.log(맵어레이);
+
+
+
+
+
+
+
 
             // html을 js로 상품목록 3개 만들어오기
             // var card1 = `<div class="col-sm-4">
