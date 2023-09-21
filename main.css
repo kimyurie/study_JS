@@ -91,8 +91,6 @@
 }
 
 
-
-
 .grey {
     background: lightgrey;
     height: 2000px;
@@ -107,4 +105,23 @@
     width : 400px;
     position: sticky;
     top: 100px;
+  }
+
+  /* apple-music */
+  .card-background {
+    height: 3000px;
+    margin-top: 800px;
+    margin-bottom: 1600px;
+  }
+  
+  .card-box img {
+    display: block;
+    margin: auto;
+    max-width: 80%;
+  }
+  .card-box {
+    position: sticky;
+    top: 200px;
+    margin-top: 200px;
+    transition: all 0.2s; /* 더 부드러운 동작*/
   }
