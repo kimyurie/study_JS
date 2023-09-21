@@ -63,7 +63,6 @@
           <div class="container my-3">
             <button class="btn btn-danger" id="filter">6만원 이하 상품보기</button>
           </div>
-
            
           <script>
             var products = [
@@ -71,6 +70,81 @@
               { id : 1, price : 50000, title : 'Springfield Shirt' },
               { id : 2, price : 60000, title : 'Black Monastery' }
             ];
+
+            // 구매 버튼 누르면 장바구니에 상품명 추가
+            products.forEach((a, i) => {
+                var card = `<div class="col-sm-4">
+                  <img src="https://via.placeholder.com/600" class="w-100">
+                  <h5>${products[i].title}</h5>
+                  <p>가격 : ${products[i].price}</p>
+                  <button class="buy">구매</button>
+                </div>`;
+
+                $('.row').append(card);
+            });
+
+             // 숙제1. 구매버튼 누르면 누른 상품명 로컬스토리지에 저장
+                // 1. 구매버튼 누르면
+                // 2. 지금 누른 버튼 윗윗 글자(h5) 가져와서
+                // 3. localStorage에 [글자] 저장
+            $('.buy').click(function(e){
+              // var title = e.target.previousElementSibling.previousElementSibling.innerHTML;
+              var title = $(e.target).siblings('h5').text();
+              // 자료가 있으면 더해서 추가
+              // 자료가 원래 없으면 원래대루
+              if(localStorage.getItem('cart') != null ){
+               // 이미 카트라는 항목이 있으면 수정하기
+               // 로컬스토리지 데이터 수정방법
+            // 1. 자료꺼냄 2. 꺼낸거 수정 3. 다시넣음
+            // 조작하기 쉽게 array/object로 바꾸기 위해 JSON.parse!
+                var 꺼낸거 = JSON.parse(localStorage.getItem('cart')); // = localStorage.getItem('cart') 
+                // array 뒤에 데이터 더 넣기
+                  꺼낸거.push(title);
+                  localStorage.setItem('cart', JSON.stringify(꺼낸거))
+              }else{
+                localStorage.setItem('cart', JSON.stringify([title]))
+              }
+            })  
+
+//             2. 아니면 같은 상품 구매 누르면 상품 갯수가 올라가게?
+// 응용문제 미완
+
+
+            // 브라우저 안에 몰래 데이터 저장 가능
+            // 로컬스토리지 사용법
+            // localStorage.setItem('이름', 'kim')
+            // localStorage.getItem('이름');
+            // localStorage.removeItem('이름');
+
+            // localStorage.setItem('num', [1,2,3]); 
+
+            // // 위 배열을 깨지지 않게 배열 형태 그대로 
+            // // 로컬스토리지에 저장하는 법
+            // // array/object -> JSON
+            // var arr = [1,2,3];
+            // var newArr = JSON.stringify(arr);
+
+            // localStorage.setItem('num', newArr);
+            // var 꺼낸거 = localStorage.getItem('num');
+
+            // // JSON -> array/object
+            // console.log(JSON.parse(꺼낸거));
+
+            // 로컬스토리지 데이터 수정방법
+            // 1. 자료꺼냄 2. 꺼낸거 수정 3. 다시넣음
+
+
+            
+      
+
+
+
+           
+
+
+
+
+
 
             // 버튼 누르면 products안 데이터 가격순 정렬
             $('#price').click(function(){
@@ -192,11 +266,6 @@
 
 
 
-
-
-
-
-
             // html을 js로 상품목록 3개 만들어오기
             // var card1 = `<div class="col-sm-4">
             //       <img src="https://via.placeholder.com/600" class="w-100">
@@ -215,15 +284,8 @@
             //     </div>`;
 
 
-            products.forEach((a, i) => {
-                var card = `<div class="col-sm-4">
-                  <img src="https://via.placeholder.com/600" class="w-100">
-                  <h5>${a.title}</h5>
-                  <p>가격 : ${products[i].price}</p>
-                </div>`;
+            
 
-                $('.row').append(card);
-            })
             
 
             // $('.row').append(card1);
@@ -236,9 +298,6 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.3/dist/js/bootstrap.bundle.min.js" integrity="sha384-ka7Sk0Gln4gmtz2MlQnikT1wXgYsOg+OMhuP+IlRH9sENBO0LRn5q+8nbTov4+1p" crossorigin="anonymous"></script>
 
 
-    <script>
-
-    </script>
 
   </body>
 </html>
