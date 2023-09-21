@@ -56,7 +56,7 @@
 .slide-container{
     /* vw는 브라우저 폭 */
     width: 300vw; 
-    transition: all 1s;
+    /* transition: all 1s; */
 }
 
 .slide-box{
