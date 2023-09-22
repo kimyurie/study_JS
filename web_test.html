@@ -42,10 +42,9 @@
       <div>
         <div style="width: 100%; padding: 20px; background-color: rgb(238, 237, 237);">
             장바구니
-            <div style="height: 300px; background-color: black;"> </div>
+            <div style="height: 300px; background-color: black;" class="basket"> </div>
         </div>
       </div>
-
 
       <script>
         fetch('https://gist.githubusercontent.com/kimyurie/b157ab366aeaca3f58303a4f0ba5d345/raw/d4d4dcc0f914aa648b38de5f99dfb1eb2f03e82b/store.json')
@@ -59,10 +58,36 @@
                     <h5>${data.products[i].title}</h5>
                     <h6>${data.products[i].brand}</h6>
                     <p>가격 : ${data.products[i].price}</p>
-                    <button class="btn btn-danger">담기</button>
+                    <button class="btn btn-danger${i}">담기</button>
                   </div>`;
 
                   $('.card-group').append(card);
+                  
+          // 1번 담기 버튼 누르면
+          // 장바구니에 1번 div 생성하기 (버튼 부분만 바꿔서)
+          var count = 0;
+          $(`.btn-danger${i}`).on('click', function(){
+            count += 1;
+            // 이미 장바구니에 상품이 있으면
+            // 추가하지 말고 수량만 올리기
+            // 없으면
+            // 생성
+            var card2 = `
+                <div class="card">
+                  <img src="">
+                  <div class="card-body">
+                    <h5>${data.products[i].title}</h5>
+                    <h6>${data.products[i].brand}</h6>
+                    <p>가격 : ${data.products[i].price}</p>
+                    <div class="cnt${i}">수량 : ${count}</div>
+                  </div>`;
+            if(count > 1){
+              $(`.cnt${i}`).text(`수량 : ${count}`);
+            }else if(count == 1){
+              $('.basket').append(card2);
+            }
+          })
+
 
                 // input에 검색어 입력하면
                 // title 글자 일치하면 상품 보여주기
@@ -70,6 +95,7 @@
                 var 검색어 = document.querySelector('.form-control').value;
 
                 var 검색어일치상품 = data.products.filter(function(a){
+                    // return 검색어 == a.title || 검색어 == a.brand;
                     if (a.title.includes(검색어) == true){
                       return a.title;
                     }else if(a.brand.includes(검색어) == true){
