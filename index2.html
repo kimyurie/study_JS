@@ -16,15 +16,16 @@
             <img src="car1.png" draggable="false">
           </div>
           <div class="slide-box">
-            <img src="car2.png">
+            <img src="car2.png" draggable="false">
           </div>
           <div class="slide-box">
-            <img src="car3.png">
+            <img src="car3.png" draggable="false">
           </div>
         </div>
       </div>
 
       <script>
+        
         var 시작좌표 = 0;
         var 눌렀냐 = false;
         // mousedown 은 마우스 누를 때 발생 / mouseup은 땠을 때
@@ -33,7 +34,6 @@
             시작좌표 = e.clientX;
             눌렀냐 = true;
         });
-
 
         // mousemove는 마우스 움직일 때 발생
         $('.slide-box').eq(0).on('mousemove', function(e){
@@ -48,8 +48,6 @@
 
         $('.slide-box').eq(0).on('mouseup', function(e){
             눌렀냐 = false;
-
-            console.log(e.clientX-시작좌표)
 
             // 마우스떼면 이동거리가 100이상이면 2번사진
             if(e.clientX-시작좌표 < -100) {
@@ -69,6 +67,83 @@
         });
 
 
+        // 응용1. 나머지 2번 3번 사진도 스와이프 가능하게 만들어봅시다.
+        // 2번 사진 마우스로 클릭하면서 왼쪽으로 꾹 눌러 일정거리 이동한후 마우스 떼면 3번 사진으로 이동
+        var 시작좌표2 = 0;
+        var 눌렀냐2 = false;
+
+        // 2번 사진 마우스로 클릭하고
+        $('.slide-box').eq(1).on('mousedown', function(e){
+            시작좌표2 = e.clientX;
+            눌렀냐2 = true;
+        });
+
+        // 누르면서 왼쪽으로 이동시키기 
+        $('.slide-box').eq(1).on('mousemove', function(e){
+         // 마우스 찍으면 
+         // 마우스 이동한 거리만큼 박스 움직이게 해주세요
+         // 이동거리? 
+        //  console.log(e.clientX - 시작좌표2);
+        //  if(눌렀냐2 == true){
+        //         $('.slide-container')
+        //         .css('transform', `translateX(${e.clientX-시작좌표2}px)`)
+        //     }
+        });
+
+        // 일정거리 이동하면 다음 또는 이전 사진으로 넘기기
+        $('.slide-box').eq(1).on('mouseup', function(e){
+            눌렀냐2 = false;
+            // 이동한 일정거리?
+           // 마우스떼면 이동거리가 100이상이면 3번사진
+           // 2번 사진 -> 3번 사진
+           if(시작좌표2 - e.clientX > 100){
+            $('.slide-container')
+                .css('transition', 'all 0.5s')
+                .css('transform', 'translateX(-200vw)');
+           }// 2번 사진 -> 1번사진
+           else if(시작좌표2 - e.clientX < -100){
+            $('.slide-container')
+                .css('transition', 'all 0.5s')
+                .css('transform', 'translateX(0vw)');
+           } 
+        });
+
+
+        // 3번 사진 
+        var 시작좌표3 = 0;
+        var 눌렀냐3 = false;
+
+        $('.slide-box').eq(2).on('mousedown', function(e){
+            시작좌표3 = e.clientX;
+            눌렀냐3 = true;
+        });
+
+        // 누르면서 왼쪽으로 이동시키기 
+        $('.slide-box').eq(2).on('mousemove', function(e){
+         // 마우스 찍으면 
+         // 마우스 이동한 거리만큼 박스 움직이게 해주세요
+         // 이동거리? 
+        //  if(눌렀냐3 == true){
+        //         $('.slide-container')
+        //         .css('transform', `translateX(${e.clientX-시작좌표3}px)`)
+        //     }
+        });
+
+        // 일정거리 이동하면 다음 또는 이전 사진으로 넘기기
+        $('.slide-box').eq(2).on('mouseup', function(e){
+            눌렀냐3 = false;
+            // 이동한 일정거리?
+           // 마우스떼면 이동거리가 100이상이면 3번사진
+           // 3번 사진 -> 2번 사진
+           if(시작좌표3 - e.clientX < -100){
+            $('.slide-container')
+                .css('transition', 'all 0.5s')
+                .css('transform', 'translateX(-100vw)');
+           } 
+
+        });
+
+        // 응용2. 첫 사진을 우측으로 스와이프 못하게 막으려면? 아마 if문 추가하면 될 수도 있겠군요
 
 
 
@@ -113,9 +188,7 @@
         // 모바일 같이 구현 가능 더 편리함
 
 
-// 응용1. 나머지 2번 3번 사진도 스와이프 가능하게 만들어봅시다.
 // 응용2. 첫 사진을 우측으로 스와이프 못하게 막으려면? 아마 if문 추가하면 될 수도 있겠군요
-// 미완
 
       </script>
 
