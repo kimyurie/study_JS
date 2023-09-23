@@ -42,14 +42,23 @@
       <div>
         <div style="width: 100%; padding: 20px; background-color: rgb(238, 237, 237);">
             장바구니
-            <div style="height: 300px; background-color: black;" class="basket"> </div>
+            <div style="background-color: black;" class="basket"> </div>
         </div>
+      </div>
+      <div>최종가격
+        <p class="sum">합계 </p>
+        <button>구매하기</button>
       </div>
 
       <script>
         fetch('https://gist.githubusercontent.com/kimyurie/b157ab366aeaca3f58303a4f0ba5d345/raw/d4d4dcc0f914aa648b38de5f99dfb1eb2f03e82b/store.json')
           .then(res => res.json()) // 받아온 json을 object로 바꿔주는 기능
           .then(function(data){
+
+            var 개별최종가격 = [];
+            var 수량 = 0;
+            var 최종가격 = 0;
+
             data.products.forEach((a,i) => {
               var card = `
                     <div class="card">
@@ -81,13 +90,24 @@
                     <p>가격 : ${data.products[i].price}</p>
                     <div class="cnt${i}">수량 : ${count}</div>
                   </div>`;
+
             if(count > 1){
               $(`.cnt${i}`).text(`수량 : ${count}`);
             }else if(count == 1){
               $('.basket').append(card2);
             }
-          })
 
+
+            $(`.cnt${i}`).on('mousedown', function(){
+                $(`.cnt${i}`).html(`<form><input type="text" value = ${count} name = "number" placeholder="수량 입력"></form>`);
+                수량 += count;
+            })
+            
+            개별최종가격.push(`${data.products[i].price}` * `${count}`);
+            최종가격 += 개별최종가격[i];
+
+            $('.sum').text(`합계 ${최종가격}`);
+          })
 
                 // input에 검색어 입력하면
                 // title 글자 일치하면 상품 보여주기
@@ -113,12 +133,14 @@
                     <h5>${a.title}</h5>
                     <h6>${a.brand}</h6>
                     <p>가격 : ${a.price}</p>
-                    <button class="btn btn-danger">담기</button>
+                    <button class="btn btn-danger${i}">담기</button>
                   </div>`;
 
                   $('.card-group').append(card);
                  })
               });
+
+
             });
           })
           .catch(function(error){
